@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CertifierRouteImport } from './routes/certifier'
+import { Route as HistoriqueRouteImport } from './routes/historique'
+import { Route as StatistiquesRouteImport } from './routes/statistiques'
+import { Route as VerifierRouteImport } from './routes/verifier'
+import { Route as VersionsIdRouteImport } from './routes/versions.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CertifierRoute = CertifierRouteImport.update({
+  id: '/certifier',
+  path: '/certifier',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoriqueRoute = HistoriqueRouteImport.update({
+  id: '/historique',
+  path: '/historique',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatistiquesRoute = StatistiquesRouteImport.update({
+  id: '/statistiques',
+  path: '/statistiques',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifierRoute = VerifierRouteImport.update({
+  id: '/verifier',
+  path: '/verifier',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VersionsIdRoute = VersionsIdRouteImport.update({
+  id: '/versions/$id',
+  path: '/versions/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/certifier': typeof CertifierRoute
+  '/historique': typeof HistoriqueRoute
+  '/statistiques': typeof StatistiquesRoute
+  '/verifier': typeof VerifierRoute
+  '/versions/$id': typeof VersionsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/certifier': typeof CertifierRoute
+  '/historique': typeof HistoriqueRoute
+  '/statistiques': typeof StatistiquesRoute
+  '/verifier': typeof VerifierRoute
+  '/versions/$id': typeof VersionsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/certifier': typeof CertifierRoute
+  '/historique': typeof HistoriqueRoute
+  '/statistiques': typeof StatistiquesRoute
+  '/verifier': typeof VerifierRoute
+  '/versions/$id': typeof VersionsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/certifier'
+    | '/historique'
+    | '/statistiques'
+    | '/verifier'
+    | '/versions/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/certifier'
+    | '/historique'
+    | '/statistiques'
+    | '/verifier'
+    | '/versions/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/certifier'
+    | '/historique'
+    | '/statistiques'
+    | '/verifier'
+    | '/versions/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CertifierRoute: typeof CertifierRoute
+  HistoriqueRoute: typeof HistoriqueRoute
+  StatistiquesRoute: typeof StatistiquesRoute
+  VerifierRoute: typeof VerifierRoute
+  VersionsIdRoute: typeof VersionsIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/certifier': {
+      id: '/certifier'
+      path: '/certifier'
+      fullPath: '/certifier'
+      preLoaderRoute: typeof CertifierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historique': {
+      id: '/historique'
+      path: '/historique'
+      fullPath: '/historique'
+      preLoaderRoute: typeof HistoriqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/statistiques': {
+      id: '/statistiques'
+      path: '/statistiques'
+      fullPath: '/statistiques'
+      preLoaderRoute: typeof StatistiquesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verifier': {
+      id: '/verifier'
+      path: '/verifier'
+      fullPath: '/verifier'
+      preLoaderRoute: typeof VerifierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/versions/$id': {
+      id: '/versions/$id'
+      path: '/versions/$id'
+      fullPath: '/versions/$id'
+      preLoaderRoute: typeof VersionsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CertifierRoute: CertifierRoute,
+  HistoriqueRoute: HistoriqueRoute,
+  StatistiquesRoute: StatistiquesRoute,
+  VerifierRoute: VerifierRoute,
+  VersionsIdRoute: VersionsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
