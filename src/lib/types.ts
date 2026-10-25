@@ -22,5 +22,5 @@ export interface CertifyInput {
   title: string;
   description: string;
   category: string;
-  previousId?: number;
+  previousId?: number | undefined;
 }

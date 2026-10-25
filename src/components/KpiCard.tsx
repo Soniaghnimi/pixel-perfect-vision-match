@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function KpiCard({ label, value, icon: Icon, hint, tone = "text-primary" }: { label: string; value: number | string; icon: LucideIcon; hint?: string; tone?: string }) {
+export function KpiCard({ label, value, icon: Icon, hint, tone = "text-primary" }: { label: string; value: number | string; icon: LucideIcon; hint?: string | undefined; tone?: string }) {
   return (
     <div className="rounded-2xl border bg-card p-5 shadow-soft">
       <div className="flex items-center justify-between text-sm text-muted-foreground">

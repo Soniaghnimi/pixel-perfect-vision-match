@@ -5,7 +5,7 @@ import type { Doc } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { StatusBadge } from "./StatusBadge";
 
-export function VersionTimeline({ chain, currentId, selected, onSelect }: { chain: Doc[]; currentId?: number; selected?: number; onSelect: (d: Doc) => void }) {
+export function VersionTimeline({ chain, currentId, selected, onSelect }: { chain: Doc[]; currentId?: number | undefined; selected?: number | undefined; onSelect: (d: Doc) => void }) {
   const inForce = [...chain].reverse().find((d) => !d.revoked)?.id;
   return (
     <ol className="space-y-0">

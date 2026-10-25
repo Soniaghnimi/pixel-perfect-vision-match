@@ -60,7 +60,7 @@ function Certify() {
   const [prevId, setPrevId] = useState<number | undefined>(from);
   const [search, setSearch] = useState("");
   const [form, setForm] = useState({ docType: "", title: "", description: "", category: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"docType"|"title"|"category"|"prev", string>>>({});
   const [stage, setStage] = useState<Stage>("idle");
   const [duplicate, setDuplicate] = useState<Doc>();
   const [result, setResult] = useState<Doc>();
@@ -81,7 +81,7 @@ function Certify() {
   };
 
   const validate = () => {
-    const e: Record<string, string> = {};
+    const e: Partial<Record<"docType"|"title"|"category"|"prev", string>> = {};
     if (!form.docType) e.docType = "Choisissez un type.";
     if (!form.title.trim()) e.title = "Le titre est obligatoire.";
     else if (form.title.length > 120) e.title = "120 caractères maximum.";
