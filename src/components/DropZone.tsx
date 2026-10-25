@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { fmtSize } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
-export function DropZone({ file, onFile }: { file?: File; onFile: (f: File) => void }) {
+export function DropZone({ file, onFile }: { file?: File | undefined; onFile: (f: File) => void }) {
   const [over, setOver] = useState(false);
   const input = useRef<HTMLInputElement>(null);
   const take = (f?: File) => {

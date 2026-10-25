@@ -24,8 +24,8 @@ interface Api {
 
 interface Ctx {
   hasMetaMask: boolean;
-  account?: string;
-  chainId?: number;
+  account?: string | undefined;
+  chainId?: number | undefined;
   wrongNetwork: boolean;
   contractConfigured: boolean;
   connect(): Promise<void>;
@@ -149,11 +149,11 @@ export function Web3Provider({ children }: { children: ReactNode }) {
     }
     const reader = () => {
       const p = typeof window !== "undefined" && window.ethereum ? new BrowserProvider(window.ethereum) : new JsonRpcProvider(RPC_URL);
-      return new Contract(artifact.address, artifact.abi, p);
+      return new Contract(artifact.address, artifact.abi, p) as any;
     };
     const writer = async () => {
       const signer = await new BrowserProvider(window.ethereum!).getSigner();
-      return new Contract(artifact.address, artifact.abi, signer);
+      return new Contract(artifact.address, artifact.abi, signer) as any;
     };
     const all = async () => enrich(((await reader().getAllDocuments()) as any[]).map(toDoc));
     return {

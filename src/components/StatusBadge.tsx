@@ -18,7 +18,7 @@ export function StatusBadge({ status, className }: { status: UiStatus; className
   );
 }
 
-export function StatusBanner({ status, extra }: { status: UiStatus; extra?: string }) {
+export function StatusBanner({ status, extra }: { status: UiStatus; extra?: string | undefined }) {
   const m = STATUS_META[status];
   return (
     <div className={cn("flex items-start gap-4 rounded-2xl border p-5", m.cls)} role="status">

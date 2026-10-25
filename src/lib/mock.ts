@@ -43,7 +43,7 @@ export function makeMockDocs(): Doc[] {
     id: i + 1,
     title: r[0], docType: r[1], category: r[2], description: r[3],
     timestamp: now - r[4] * DAY - i * 3600,
-    issuer: r[5] === -1 ? MOCK_ME : OTHERS[r[5]],
+    issuer: r[5] === -1 ? MOCK_ME : OTHERS[r[5]]!,
     revoked: r[6], previousId: r[7], hash: h(r[8]),
   }));
 }
