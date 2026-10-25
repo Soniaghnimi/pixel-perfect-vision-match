@@ -1,0 +1,19 @@
+{
+  "address": "0x0000000000000000000000000000000000000000",
+  "abi": [
+    "function certify(bytes32 hash,string docType,string title,string description,string category) returns (uint256)",
+    "function certifyNewVersion(uint256 previousId,bytes32 hash,string docType,string title,string description,string category) returns (uint256)",
+    "function revoke(uint256 id)",
+    "function verify(bytes32 hash) view returns (uint8 status, tuple(uint256 id,bytes32 hash,address issuer,uint256 timestamp,uint256 previousId,string docType,string title,string description,string category,bool revoked) doc)",
+    "function getDocument(uint256 id) view returns (tuple(uint256 id,bytes32 hash,address issuer,uint256 timestamp,uint256 previousId,string docType,string title,string description,string category,bool revoked))",
+    "function getVersionChain(uint256 id) view returns (tuple(uint256 id,bytes32 hash,address issuer,uint256 timestamp,uint256 previousId,string docType,string title,string description,string category,bool revoked)[])",
+    "function getDocumentsByIssuer(address issuer) view returns (tuple(uint256 id,bytes32 hash,address issuer,uint256 timestamp,uint256 previousId,string docType,string title,string description,string category,bool revoked)[])",
+    "function getAllDocuments() view returns (tuple(uint256 id,bytes32 hash,address issuer,uint256 timestamp,uint256 previousId,string docType,string title,string description,string category,bool revoked)[])",
+    "function countByIssuer(address issuer) view returns (uint256)",
+    "function totalDocuments() view returns (uint256)",
+    "function totalRevoked() view returns (uint256)",
+    "function nextVersionId(uint256 id) view returns (uint256)",
+    "event Certified(uint256 indexed id, bytes32 indexed hash, address indexed issuer, uint256 previousId, string category, uint256 timestamp)",
+    "event Revoked(uint256 indexed id, address indexed issuer, uint256 timestamp)"
+  ]
+}
