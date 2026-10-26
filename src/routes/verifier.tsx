@@ -4,7 +4,7 @@ import { Loader2 } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CATEGORIES, DOC_TYPES } from "@/lib/config";
 import { DropZone } from "@/components/DropZone";
@@ -150,7 +150,7 @@ function CompareOriginal({ hash }: { hash: string }) {
         <div>
           <p className="mb-1.5 text-xs font-medium text-muted-foreground">Type</p>
           <Select value={fType} onValueChange={setFType}>
-            <SelectTrigger aria-label="Filtrer par type"><SelectValue placeholder="Tous les types" /></SelectTrigger>
+            <SelectTrigger aria-label="Filtrer par type">{fType === "all" ? "Tous les types" : fType}</SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Tous les types</SelectItem>
               {DOC_TYPES.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
@@ -160,7 +160,7 @@ function CompareOriginal({ hash }: { hash: string }) {
         <div>
           <p className="mb-1.5 text-xs font-medium text-muted-foreground">Domaine</p>
           <Select value={fCat} onValueChange={setFCat}>
-            <SelectTrigger aria-label="Filtrer par domaine"><SelectValue placeholder="Tous les domaines" /></SelectTrigger>
+            <SelectTrigger aria-label="Filtrer par domaine">{fCat === "all" ? "Tous les domaines" : fCat}</SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Tous les domaines</SelectItem>
               {CATEGORIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
