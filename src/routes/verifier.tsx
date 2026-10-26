@@ -4,7 +4,9 @@ import { Loader2 } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
+import { CATEGORIES, DOC_TYPES } from "@/lib/config";
 import { DropZone } from "@/components/DropZone";
 import { HashDisplay } from "@/components/HashDisplay";
 import { ProofCard } from "@/components/ProofCard";
@@ -116,8 +118,15 @@ function Verify() {
 function CompareOriginal({ hash }: { hash: string }) {
   const { docs } = useDocuments();
   const [q, setQ] = useState("");
+  const [fType, setFType] = useState<string>("all");
+  const [fCat, setFCat] = useState<string>("all");
   const [orig, setOrig] = useState<Doc>();
-  const list = (docs ?? []).filter((d) => d.title.toLowerCase().includes(q.toLowerCase()) || String(d.id) === q);
+  const list = (docs ?? []).filter(
+    (d) =>
+      (fType === "all" || d.docType === fType) &&
+      (fCat === "all" || d.category === fCat) &&
+      (d.title.toLowerCase().includes(q.toLowerCase()) || String(d.id) === q),
+  );
   if (orig) {
     const same = orig.hash.toLowerCase() === hash.toLowerCase();
     return (
@@ -137,9 +146,34 @@ function CompareOriginal({ hash }: { hash: string }) {
   return (
     <div className="rounded-2xl border bg-card p-5">
       <p className="font-medium">Sélectionnez le document original</p>
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        <div>
+          <p className="mb-1.5 text-xs font-medium text-muted-foreground">Type</p>
+          <Select value={fType} onValueChange={setFType}>
+            <SelectTrigger><SelectValue placeholder="Tous les types" /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Tous les types</SelectItem>
+              {DOC_TYPES.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <p className="mb-1.5 text-xs font-medium text-muted-foreground">Domaine</p>
+          <Select value={fCat} onValueChange={setFCat}>
+            <SelectTrigger><SelectValue placeholder="Tous les domaines" /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Tous les domaines</SelectItem>
+              {CATEGORIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
       <Input className="mt-3" placeholder="Rechercher par titre ou identifiant…" value={q} onChange={(e) => setQ(e.target.value)} />
       <div className="mt-2 max-h-64 space-y-1 overflow-auto">
         {!docs && <Skeleton className="h-24" />}
+        {docs && list.length === 0 && (
+          <p className="px-3 py-4 text-sm text-muted-foreground">Aucun document ne correspond à ces filtres.</p>
+        )}
         {list.map((d) => (
           <button key={d.id} type="button" onClick={() => setOrig(d)} className={cn("flex w-full justify-between rounded-md px-3 py-2 text-left text-sm hover:bg-muted")}>
             <span>#{d.id} · {d.title} <span className="text-muted-foreground">V{d.version}</span></span>
