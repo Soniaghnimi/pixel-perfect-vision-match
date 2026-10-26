@@ -150,7 +150,7 @@ function CompareOriginal({ hash }: { hash: string }) {
         <div>
           <p className="mb-1.5 text-xs font-medium text-muted-foreground">Type</p>
           <Select value={fType} onValueChange={setFType}>
-            <SelectTrigger><SelectValue placeholder="Tous les types" /></SelectTrigger>
+            <SelectTrigger aria-label="Filtrer par type"><SelectValue placeholder="Tous les types" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Tous les types</SelectItem>
               {DOC_TYPES.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
@@ -160,7 +160,7 @@ function CompareOriginal({ hash }: { hash: string }) {
         <div>
           <p className="mb-1.5 text-xs font-medium text-muted-foreground">Domaine</p>
           <Select value={fCat} onValueChange={setFCat}>
-            <SelectTrigger><SelectValue placeholder="Tous les domaines" /></SelectTrigger>
+            <SelectTrigger aria-label="Filtrer par domaine"><SelectValue placeholder="Tous les domaines" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Tous les domaines</SelectItem>
               {CATEGORIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
